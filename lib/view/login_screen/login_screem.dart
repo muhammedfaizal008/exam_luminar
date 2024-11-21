@@ -15,9 +15,9 @@ class LoginScreem extends StatefulWidget {
 class _LoginScreemState extends State<LoginScreem> {
   TextEditingController controller = TextEditingController();
   TextEditingController controller2 = TextEditingController();
+  bool showPass=true;
   final _formKey = GlobalKey<FormState>();
 
-  // Email validation function
   String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please enter your email address';
@@ -31,7 +31,6 @@ class _LoginScreemState extends State<LoginScreem> {
     return null;
   }
 
-  // Password validation function
   String? validatePassword(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please enter your password';
@@ -71,22 +70,28 @@ class _LoginScreemState extends State<LoginScreem> {
               SizedBox(height: 10),
               TextFormField(
                 controller: controller2,
-                obscureText: true,
+                obscureText: showPass,
                 validator: validatePassword,
                 decoration: InputDecoration(
                   hintText: "Your Password",
                   border: OutlineInputBorder(),
-                  suffixIcon: Icon(Icons.remove_red_eye_outlined),
+                  suffixIcon: IconButton(onPressed: (){
+                    showPass = !showPass;
+                    setState(() {
+                      
+                    });
+                  },icon: Icon(showPass ? Icons.remove_red_eye_outlined : Icons.visibility_off),),
                 ),
               ),
               Row(
                 children: [
-                  IconButton(onPressed: () {}, icon: Icon(Icons.check_box_outlined)),
+                  IconButton(onPressed: () {
+                    
+                  }, icon: Icon(Icons.check_box_outlined)),
                   Text("Remember Me"),
                   Spacer(),
                   InkWell(
                     onTap: () {
-                      // Forgot password logic can be implemented here
                     },
                     child: Text(
                       "Forgot Password",
@@ -97,7 +102,6 @@ class _LoginScreemState extends State<LoginScreem> {
               ),
               InkWell(
                 onTap: () async {
-                  // Validate the form before proceeding
                   if (_formKey.currentState!.validate()) {
                     final SharedPreferences prefs =
                         await SharedPreferences.getInstance();

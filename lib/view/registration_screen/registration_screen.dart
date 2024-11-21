@@ -16,7 +16,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   TextEditingController controller3 = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  // Email validation function
   String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please enter your email address';
@@ -30,7 +29,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     return null;
   }
 
-  // Password validation function
   String? validatePassword(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please enter a password';
@@ -41,7 +39,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     return null;
   }
 
-  // Confirm password validation function
   String? validateConfirmPassword(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please confirm your password';
@@ -106,7 +103,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         await SharedPreferences.getInstance();
                     await prefs.setString('signup_email', controller.text);
                     await prefs.setString('signup_password', controller2.text);
-                    Navigator.pop(context); // Navigate back to the previous screen
+                    Navigator.pop(context);
                   }
                 },
                 child: Container(
